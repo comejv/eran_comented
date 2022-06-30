@@ -290,9 +290,6 @@ void handle_fully_connected_layer_with_backsubstitute(elina_manager_t* man, elin
 }
 
 void handle_right_multiply_with_matrix(elina_manager_t* man, elina_abstract0_t* element, double **weights, size_t num_weight_rows, size_t num_weight_cols, size_t num_out_cols, size_t * predecessors, size_t num_predecessors){
-	// Côme
-    printf("right multiply %zu %zu %zu\n", num_weight_rows, num_weight_cols,num_out_cols);
-    //fflush(stdout);
     assert(num_predecessors==1);
     fppoly_t *fp = fppoly_of_abstract0(element);
     
