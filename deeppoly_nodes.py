@@ -35,6 +35,7 @@ def calc_bounds(man, element, nn, nlb, nub, relu_groups, is_refine_layer = False
     layerno = nn.calc_layerno()
 
     # Come step 8
+    # (look for // Come 8.a and 8.b)
     # Call ELINA again
     bounds = box_for_layer(man, element, layerno)
     num_neurons = get_num_neurons_in_layer(man, element, layerno)
@@ -242,15 +243,13 @@ class DeeppolyFCNode(DeeppolyNode):
         output : ElinaAbstract0Ptr
             abstract element after the transformer 
         """
-        # Come 6
+        # Come step 7
         # call ELINA function defined l.206 of fppoly.py (ERAN/ELINA/python_interface/fppoly.py)
         # which then calls handle_fully_connected_layer_with_backsubstitute in ELINA/fppoly/fppoly.c
-        # (look for // Come 6.a and 6.b)
         # creates sparse expressions
         handle_fully_connected_layer(man, element, *self.get_arguments())
 
-        # Come step 7
-        # (look for // Come 7.a and 7.b)
+        # Come step 8
         # function defined l. 33 of same file
         calc_bounds(man, element, nn, nlb, nub, relu_groups, is_refine_layer=True, use_krelu=refine)
         nn.ffn_counter+=1

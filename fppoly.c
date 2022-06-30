@@ -238,7 +238,7 @@ void layer_fprint(FILE * stream, layer_t * layer, char** name_of_dim){
 }
 
 
-
+// Come step 7.b
 void handle_fully_connected_layer_with_backsubstitute(elina_manager_t* man, elina_abstract0_t* element, double **weights, double * cst, size_t num_out_neurons, size_t num_in_neurons, size_t * predecessors, size_t num_predecessors, bool alloc, fnn_op OP){
     //printf("FC start here %zu %zu %zu %zu\n",num_in_neurons,num_out_neurons,predecessors[0],num_predecessors);
     //fflush(stdout);
@@ -383,7 +383,7 @@ void handle_fully_connected_layer_no_alloc(elina_manager_t* man, elina_abstract0
     handle_fully_connected_layer_with_backsubstitute(man, abs, weights, bias, size, num_pixels, predecessors, num_predecessors, false, MATMULT);
 }
 
-
+// Come step 7.a
 void handle_fully_connected_layer(elina_manager_t* man, elina_abstract0_t * abs, double **weights, double *bias,   size_t size, size_t num_pixels, size_t *predecessors, size_t num_predecessors){
     handle_fully_connected_layer_with_backsubstitute(man, abs, weights, bias, size, num_pixels, predecessors, num_predecessors, true, MATMULT);
 }
@@ -988,7 +988,7 @@ void fppoly_fprint(FILE* stream, elina_manager_t* man, fppoly_t* fp, char** name
 
 }
 
-
+// Come step 8.b
 elina_interval_t * box_for_neuron(elina_manager_t* man, elina_abstract0_t * abs, size_t layerno, size_t neuron_no){
 	fppoly_t *fp = fppoly_of_abstract0(abs);
 	if(layerno >= fp->numlayers){
@@ -1007,6 +1007,7 @@ elina_interval_t * box_for_neuron(elina_manager_t* man, elina_abstract0_t * abs,
 	return res;
 }
 
+// Come step 8.a
 elina_interval_t ** box_for_layer(elina_manager_t* man, elina_abstract0_t * abs, size_t layerno){
 	fppoly_t *fp = fppoly_of_abstract0(abs);
 	if(layerno >= fp->numlayers){

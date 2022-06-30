@@ -162,19 +162,19 @@ class Analyzer:
         """
         processes self.ir_list and returns the resulting abstract element
         """
-        # Come
+        # Come step 5
         # transformer for the input layer
-        # defined l.155 in deeppoly_nodes.py
+        # defined l.159 in deeppoly_nodes.py
         element = self.ir_list[0].transformer(self.man)
         nlb = []
         nub = []
         testing_nlb = []
         testing_nub = []
 
-        # Come step 5:
         # Loop over ir_list containing every nn layer
         for i in range(1, len(self.ir_list)):
             # if dealing with activation function use transformer from appropriate class in deeppoly_nodes.py
+            # Relu is l.298
             if type(self.ir_list[i]) in [DeeppolyReluNode,DeeppolySigmoidNode,DeeppolyTanhNode,DeepzonoRelu,DeepzonoSigmoid,DeepzonoTanh]:
                 element_test_bounds = self.ir_list[i].transformer(self.nn, self.man, element, nlb, nub,
                                                                   self.relu_groups, 'refine' in self.domain,
@@ -182,6 +182,7 @@ class Analyzer:
                                                                   self.use_default_heuristic, self.testing,
                                                                   K=self.K, s=self.s, use_milp=self.use_milp,
                                                                   approx=self.approx_k)
+            # Come step 6
             # else : dealing with FC (fully connected) layer use transformer l.227 in deeppoly_nodes.py
             else:
                 element_test_bounds = self.ir_list[i].transformer(self.nn, self.man, element, nlb, nub,
@@ -289,7 +290,7 @@ class Analyzer:
             else:
                 adv_labels.append(self.prop)
 
-            # Come step 8 (last):
+            # Come step 9 (last):
             # find the dominant class (lower bound higher than other classes)
             for label in candidate_labels:
                 flag = True
